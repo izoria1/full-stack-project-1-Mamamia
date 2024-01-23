@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'djoser',
     'restaurant',
 ]
@@ -62,18 +63,8 @@ REST_FRAMEWORK = {
     # ... other REST framework settings ...
 }
 
-DJOSER = {
-    'LOGIN_FIELD': 'email',
-    'USER_CREATE_PASSWORD_RETYPE': True,
-    'SEND_ACTIVATION_EMAIL': True,
-    'SEND_CONFIRMATION_EMAIL': True,
-    'ACTIVATION_URL': 'activate/{uid}/{token}',
-    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
-    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
-    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
-    # ... add more settings as needed ...
-}
+DJOSER = {"USER_ID_FIELD": "username"}
+
 
 
 ROOT_URLCONF = 'LittleLemon.urls'
