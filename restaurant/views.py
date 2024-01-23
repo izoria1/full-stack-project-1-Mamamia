@@ -6,8 +6,6 @@ from .models import Menu, Booking
 from .serializers import MenuSerializer, BookingSerializer
 
 
-
-
 # Create your views here.
 def index(request):
     return render(request, 'index.html', {})
