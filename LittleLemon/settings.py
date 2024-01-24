@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'corsheaders',
     'restaurant',
 ]
 
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -63,9 +65,24 @@ REST_FRAMEWORK = {
     # ... other REST framework settings ...
 }
 
-DJOSER = {"USER_ID_FIELD": "username"}
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'restaurant.serializers.CustomUserCreateSerializer',
+        # Other Djoser settings...
+    },
+    "USER_ID_FIELD": "username",
+}
 
 
+AUTH_USER_MODEL = 'restaurant.CustomUser'
+
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    # other allowed origins...
+]
 
 ROOT_URLCONF = 'LittleLemon.urls'
 

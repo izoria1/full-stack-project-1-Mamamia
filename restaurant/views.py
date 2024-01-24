@@ -3,7 +3,12 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, De
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from .models import Menu, Booking
-from .serializers import MenuSerializer, BookingSerializer
+from .serializers import MenuSerializer, BookingSerializer, CustomAuthTokenSerializer
+
+from djoser.views import TokenCreateView
+
+class CustomTokenCreateView(TokenCreateView):
+    serializer_class = CustomAuthTokenSerializer
 
 
 # Create your views here.

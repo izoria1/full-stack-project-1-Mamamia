@@ -1,4 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser(AbstractUser):
+    is_staff_member = models.BooleanField(default=False)
+    # Add other fields as needed
 
 class Booking(models.Model):
     ID = models.AutoField(primary_key=True)
