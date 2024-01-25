@@ -39,7 +39,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                     {isLoggedIn && (
                         <>
                             <Nav.Link as={Link} to="/bookings" className="nav-item">Bookings</Nav.Link>
-                            <button className="btn btn-secondary logout-button" onClick={handleLogout}>Logout</button>
+                            <button className="btn btn-secondary logout-button" onClick={handleLogout}>Log out</button>
                         </>
                     )}
                 </Nav>

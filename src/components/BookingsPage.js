@@ -149,7 +149,7 @@ const BookingsPage = () => {
                         <Button variant="secondary" size="sm" onClick={() => handleEdit(booking)}>Edit</Button>
                         <Button variant="danger" size="sm" onClick={() => handleCancel(booking.ID)}>Cancel</Button>
                     </ListGroup.Item>
-                )) : <p>No bookings found.</p>}
+                )) : <p id="no-bookings">No bookings found...</p>}
             </ListGroup>
         </Container>
     );

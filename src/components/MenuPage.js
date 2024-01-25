@@ -28,15 +28,15 @@ const MenuPage = () => {
 
     return (
         <Container className="mt-5">
-            <h1 class="menu-title">Menu</h1>
+            <h1 class="menu-title">🍝 Discover Our Menu 🍕</h1>
             <Row xs={1} md={2} lg={3} className="g-4">
                 {menuItems.map(item => (
                     <Col key={item.ID}>
                         <Card>
                             <Card.Img variant="top" src={`/images/${getImageFilename(item.Title)}`} alt={item.Title} className="menu-image" />
                             <Card.Body>
-                                <Card.Title>{item.Title}</Card.Title>
-                                <Card.Text>Price: ${parseFloat(item.Price).toFixed(2)}</Card.Text>
+                                <Card.Title class="card-title">{item.Title}</Card.Title>
+                                <Card.Text class="card-text">Price: ${parseFloat(item.Price).toFixed(2)}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
