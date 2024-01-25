@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
+import { Form, Button, Container } from 'react-bootstrap';
+
 
 const LoginPage = ({ setIsLoggedIn }) => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
-    const navigate = useNavigate(); // useNavigate instead of useHistory
+    const navigate = useNavigate(); 
 
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -35,14 +37,22 @@ const LoginPage = ({ setIsLoggedIn }) => {
     };
 
     return (
-        <div>
+        <Container className="mt-5">
             <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="username" placeholder="Username" onChange={handleChange} />
-                <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-                <button type="submit">Login</button>
-            </form>
-        </div>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formBasicUsername">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type="text" placeholder="Username" name="username" onChange={handleChange} />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
+                </Form.Group>
+
+                <Button variant="primary" type="submit">Login</Button>
+            </Form>
+        </Container>
     );
 };
 

@@ -6,6 +6,8 @@ import RegisterPage from './components/RegisterPage';
 import LoginPage from './components/LoginPage';
 import BookingsPage from './components/BookingsPage';
 import Navbar from './components/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);

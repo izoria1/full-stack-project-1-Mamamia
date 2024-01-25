@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Form, Button, ListGroup, Container } from 'react-bootstrap';
 
 const BookingsPage = () => {
     const [bookings, setBookings] = useState([]);
@@ -110,43 +111,37 @@ const BookingsPage = () => {
     };
 
     return (
-        <div>
+        <Container className="mt-5">
             <h1>{editing ? 'Edit Booking' : 'Create New Booking'}</h1>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="text" 
-                    name="Name" 
-                    placeholder="Name" 
-                    value={newBooking.Name} 
-                    onChange={handleChange} 
-                />
-                <input 
-                    type="datetime-local" 
-                    name="BookingDate" 
-                    value={newBooking.BookingDate} 
-                    onChange={handleChange} 
-                />
-                <input 
-                    type="number" 
-                    name="No_of_guests" 
-                    placeholder="Number of Guests" 
-                    value={newBooking.No_of_guests} 
-                    onChange={handleChange} 
-                />
-                <button type="submit">{editing ? 'Update Booking' : 'Create Booking'}</button>
-            </form>
-            {bookings.length > 0 ? (
-                bookings.map((booking) => (
-                    <li key={booking.ID}>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" placeholder="Name" name="Name" value={newBooking.Name} onChange={handleChange} />
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Booking Date</Form.Label>
+                    <Form.Control type="datetime-local" name="BookingDate" value={newBooking.BookingDate} onChange={handleChange} />
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Number of Guests</Form.Label>
+                    <Form.Control type="number" placeholder="Number of Guests" name="No_of_guests" value={newBooking.No_of_guests} onChange={handleChange} />
+                </Form.Group>
+
+                <Button variant="primary" type="submit">{editing ? 'Update Booking' : 'Create Booking'}</Button>
+            </Form>
+
+            <ListGroup className="mt-4">
+                {bookings.length > 0 ? bookings.map(booking => (
+                    <ListGroup.Item key={booking.ID}>
                         {booking.Name} - {new Date(booking.BookingDate).toLocaleString()} - {booking.No_of_guests} guests
-                        <button onClick={() => handleEdit(booking)}>Edit</button>
-                        <button onClick={() => handleCancel(booking.ID)}>Cancel</button> {/* Cancel button */}
-                    </li>
-                ))
-            ) : (
-                <p>No bookings found.</p>
-            )}
-        </div>
+                        <Button variant="secondary" size="sm" onClick={() => handleEdit(booking)}>Edit</Button>
+                        <Button variant="danger" size="sm" onClick={() => handleCancel(booking.ID)}>Cancel</Button>
+                    </ListGroup.Item>
+                )) : <p>No bookings found.</p>}
+            </ListGroup>
+        </Container>
     );
 };
 

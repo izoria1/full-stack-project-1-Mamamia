@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
+import { Form, Button, Container } from 'react-bootstrap';
+
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({ username: '', password: '', email: '' });
@@ -30,15 +32,27 @@ const RegisterPage = () => {
     };
 
     return (
-        <div>
+        <Container className="mt-5">
             <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="username" placeholder="Username" onChange={handleChange} />
-                <input type="email" name="email" placeholder="Email" onChange={handleChange} />
-                <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-                <button type="submit">Register</button>
-            </form>
-        </div>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formBasicUsername">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type="text" placeholder="Enter username" name="username" onChange={handleChange} />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" name="email" onChange={handleChange} />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
+                </Form.Group>
+
+                <Button variant="primary" type="submit">Register</Button>
+            </Form>
+        </Container>
     );
 };
 

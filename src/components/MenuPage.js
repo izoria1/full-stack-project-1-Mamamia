@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Card, ListGroup, Container } from 'react-bootstrap';
+
 
 const MenuPage = () => {
     const [menuItems, setMenuItems] = useState([]);
@@ -21,16 +23,21 @@ const MenuPage = () => {
     }, []);
 
     return (
-        <div>
+        <Container className="mt-5">
             <h1>Menu</h1>
-            <ul>
+            <ListGroup>
                 {menuItems.map(item => (
-                    <li key={item.ID}>
-                        {item.Title} - Price: ${parseFloat(item.Price).toFixed(2)}
-                    </li>
+                    <ListGroup.Item key={item.ID}>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>{item.Title}</Card.Title>
+                                <Card.Text>Price: ${parseFloat(item.Price).toFixed(2)}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </ListGroup.Item>
                 ))}
-            </ul>
-        </div>
+            </ListGroup>
+        </Container>
     );
 };
 
