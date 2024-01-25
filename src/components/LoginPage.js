@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import { Form, Button, Container } from 'react-bootstrap';
-
+import { useNavigate } from 'react-router-dom';
+import { Form, Button, Container, Alert } from 'react-bootstrap'; // Import Alert for error messages
+import '../styles/LoginPage.css'; // Import custom CSS for LoginPage styling
 
 const LoginPage = ({ setIsLoggedIn }) => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
-    const navigate = useNavigate(); 
+    const [error, setError] = useState(null); // State for error message
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -13,6 +14,8 @@ const LoginPage = ({ setIsLoggedIn }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null); // Clear any previous errors
+
         try {
             const response = await fetch('http://127.0.0.1:8000/auth/token/login/', {
                 method: 'POST',
@@ -28,17 +31,18 @@ const LoginPage = ({ setIsLoggedIn }) => {
 
             const data = await response.json();
             localStorage.setItem('token', data.auth_token);
-            setIsLoggedIn(true); // Update isLoggedIn state
-            navigate('/bookings'); // Use navigate for redirection
+            setIsLoggedIn(true);
+            navigate('/bookings');
         } catch (error) {
+            setError('Login failed. Please check your credentials.'); // Set error message
             console.error('Login failed:', error);
-            // Handle login failure
         }
     };
 
     return (
-        <Container className="mt-5">
+        <Container className="login-container">
             <h1>Login</h1>
+            {error && <Alert variant="danger">{error}</Alert>} {/* Display error message */}
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicUsername">
                     <Form.Label>Username</Form.Label>
@@ -50,7 +54,9 @@ const LoginPage = ({ setIsLoggedIn }) => {
                     <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">Login</Button>
+                <Button variant="primary" type="submit">
+                    Login
+                </Button>
             </Form>
         </Container>
     );

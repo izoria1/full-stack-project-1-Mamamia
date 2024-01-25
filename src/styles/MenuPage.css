@@ -1,0 +1,21 @@
+/* src/styles/MenuPage.css */
+.menu-image {
+    width: 100%; /* Make the image responsive */
+    height: 300px; /* Fixed height for all images */
+    object-fit:cover; /* Cover the area without stretching the image */
+    border-radius: 5%;
+}
+
+.menu-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+
+.mt-5 {
+    background-color: #FBF9F1;
+    border-radius: 2%;
+}
+
+

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Button, ListGroup, Container } from 'react-bootstrap';
+import { Form, Button, ListGroup, Container, Alert } from 'react-bootstrap';
+import '../styles/BookingsPage.css'; // Import custom CSS for BookingsPage styling
 
 const BookingsPage = () => {
     const [bookings, setBookings] = useState([]);
     const [newBooking, setNewBooking] = useState({ Name: '', BookingDate: '', No_of_guests: '' });
     const [editing, setEditing] = useState(false);
     const [currentBookingId, setCurrentBookingId] = useState(null);
-    
+    const [error, setError] = useState(null); // State for error message
 
     // Define fetchBookings outside of useEffect
     const fetchBookings = async () => {
@@ -25,9 +26,11 @@ const BookingsPage = () => {
                     const data = await response.json();
                     setBookings(data);
                 } else {
+                    setError('Error fetching bookings.'); // Set error message
                     console.error('Error fetching bookings:', response.statusText);
                 }
             } catch (error) {
+                setError('There was an error. Please try again later.'); // Set error message
                 console.error('Error:', error);
             }
         }
@@ -57,6 +60,8 @@ const BookingsPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null); // Clear any previous errors
+
         const token = localStorage.getItem('token');
         const url = editing 
             ? `http://127.0.0.1:8000/restaurant/booking/${currentBookingId}/`
@@ -80,9 +85,11 @@ const BookingsPage = () => {
                     setEditing(false);
                     setCurrentBookingId(null);
                 } else {
+                    setError('Booking submission failed. Please check your information.'); // Set error message
                     console.error('Error:', response.statusText);
                 }
             } catch (error) {
+                setError('There was an error. Please try again later.'); // Set error message
                 console.error('Error:', error);
             }
         }
@@ -102,17 +109,20 @@ const BookingsPage = () => {
                 if (response.ok) {
                     fetchBookings(); // Refresh bookings after cancellation
                 } else {
+                    setError('Error cancelling booking.'); // Set error message
                     console.error('Error cancelling booking:', response.statusText);
                 }
             } catch (error) {
+                setError('There was an error. Please try again later.'); // Set error message
                 console.error('Error:', error);
             }
         }
     };
 
     return (
-        <Container className="mt-5">
+        <Container className="bookings-container">
             <h1>{editing ? 'Edit Booking' : 'Create New Booking'}</h1>
+            {error && <Alert variant="danger">{error}</Alert>} {/* Display error message */}
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Name</Form.Label>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, Container } from 'react-bootstrap';
-
+import { Form, Button, Container, Alert } from 'react-bootstrap'; // Import Alert for error messages
+import '../styles/RegisterPage.css'; // Import custom CSS for RegisterPage styling
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({ username: '', password: '', email: '' });
-    const navigate = useNavigate(); // useNavigate instead of useHistory
+    const [error, setError] = useState(null); // State for error message
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -13,6 +14,8 @@ const RegisterPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null); // Clear any previous errors
+
         try {
             const response = await fetch('http://127.0.0.1:8000/auth/users/', {
                 method: 'POST',
@@ -21,19 +24,23 @@ const RegisterPage = () => {
                 },
                 body: JSON.stringify(formData),
             });
+
             if (response.ok) {
-                navigate('/login'); // Use navigate for redirection
+                navigate('/login');
             } else {
+                setError('Registration failed. Please check your information.'); // Set error message
                 console.log('Registration failed');
             }
         } catch (error) {
+            setError('There was an error. Please try again later.'); // Set error message
             console.error('There was an error:', error);
         }
     };
 
     return (
-        <Container className="mt-5">
+        <Container className="register-container">
             <h1>Register</h1>
+            {error && <Alert variant="danger">{error}</Alert>} {/* Display error message */}
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicUsername">
                     <Form.Label>Username</Form.Label>
@@ -50,7 +57,9 @@ const RegisterPage = () => {
                     <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">Register</Button>
+                <Button variant="primary" type="submit">
+                    Register
+                </Button>
             </Form>
         </Container>
     );

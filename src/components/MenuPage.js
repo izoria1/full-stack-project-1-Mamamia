@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Card, ListGroup, Container } from 'react-bootstrap';
-
+import { Card, Container, Row, Col } from 'react-bootstrap';
+import '../styles/MenuPage.css'; 
 
 const MenuPage = () => {
     const [menuItems, setMenuItems] = useState([]);
@@ -22,21 +22,26 @@ const MenuPage = () => {
         fetchMenuItems();
     }, []);
 
+    const getImageFilename = (title) => {
+        return title.toLowerCase().replace(/\s+/g, '-') + '.png';
+    };
+
     return (
         <Container className="mt-5">
-            <h1>Menu</h1>
-            <ListGroup>
+            <h1 class="menu-title">Menu</h1>
+            <Row xs={1} md={2} lg={3} className="g-4">
                 {menuItems.map(item => (
-                    <ListGroup.Item key={item.ID}>
+                    <Col key={item.ID}>
                         <Card>
+                            <Card.Img variant="top" src={`/images/${getImageFilename(item.Title)}`} alt={item.Title} className="menu-image" />
                             <Card.Body>
                                 <Card.Title>{item.Title}</Card.Title>
                                 <Card.Text>Price: ${parseFloat(item.Price).toFixed(2)}</Card.Text>
                             </Card.Body>
                         </Card>
-                    </ListGroup.Item>
+                    </Col>
                 ))}
-            </ListGroup>
+            </Row>
         </Container>
     );
 };
