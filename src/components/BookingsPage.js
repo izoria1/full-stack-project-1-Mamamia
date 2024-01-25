@@ -61,7 +61,7 @@ const BookingsPage = () => {
             ? `http://127.0.0.1:8000/restaurant/booking/${currentBookingId}/`
             : 'http://127.0.0.1:8000/restaurant/booking/';
         const method = editing ? 'PUT' : 'POST';
-
+    
         if (token) {
             try {
                 const response = await fetch(url, {
