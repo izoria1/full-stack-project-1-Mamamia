@@ -88,3 +88,6 @@ ENV/
 
 # Environment Variables
 .env
+
+# Configuration files with sensitive information
+*.conf
