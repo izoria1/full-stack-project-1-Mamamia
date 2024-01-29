@@ -1,9 +1,8 @@
-// Navbar.js
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Navbar as BootstrapNavbar, Nav } from 'react-bootstrap';
-import '../styles/Navbar.css'; // Import custom CSS for Navbar
-import logo from '../assets/logo.png'; // Use '../' to move up one directory
+import '../styles/Navbar.css'; 
+import logo from '../assets/logo.png'; 
 
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
@@ -19,9 +18,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         <BootstrapNavbar bg="primary" variant="dark" expand="lg">
             <BootstrapNavbar.Brand as={Link} to="/">
                 <img
-                    src={logo} // or "/logo.png" if it's in the public folder
+                    src={logo} 
                     alt="Brand Logo"
-                    height="30" // Adjust the size as needed
+                    height="30" 
                     className="d-inline-block align-top"
                 />
                 {' '} Mama Mia!

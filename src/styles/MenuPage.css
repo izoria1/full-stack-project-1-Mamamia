@@ -1,7 +1,7 @@
 .menu-image {
-    width: 100%; /* Make the image responsive */
-    height: 370px; /* Fixed height for all images */
-    object-fit:cover; /* Cover the area without stretching the image */
+    width: 100%; 
+    height: 370px; 
+    object-fit:cover; 
     border-radius: 5%;
 }
 

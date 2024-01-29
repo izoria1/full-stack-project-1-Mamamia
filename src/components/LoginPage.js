@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, Container, Alert } from 'react-bootstrap'; // Import Alert for error messages
-import '../styles/LoginPage.css'; // Import custom CSS for LoginPage styling
+import { Form, Button, Container, Alert } from 'react-bootstrap'; 
+import '../styles/LoginPage.css'; 
 
 const LoginPage = ({ setIsLoggedIn }) => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
-    const [error, setError] = useState(null); // State for error message
+    const [error, setError] = useState(null); 
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -14,7 +14,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null); // Clear any previous errors
+        setError(null); 
 
         try {
             const response = await fetch('http://127.0.0.1:8000/auth/token/login/', {
@@ -34,7 +34,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
             setIsLoggedIn(true);
             navigate('/bookings');
         } catch (error) {
-            setError('Login failed. Please check your credentials.'); // Set error message
+            setError('Login failed. Please check your credentials.'); 
             console.error('Login failed:', error);
         }
     };

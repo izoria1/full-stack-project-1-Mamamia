@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, Container, Alert } from 'react-bootstrap'; // Import Alert for error messages
-import '../styles/RegisterPage.css'; // Import custom CSS for RegisterPage styling
+import { Form, Button, Container, Alert } from 'react-bootstrap'; 
+import '../styles/RegisterPage.css'; 
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({ username: '', password: '', email: '' });
-    const [error, setError] = useState(null); // State for error message
+    const [error, setError] = useState(null); 
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -14,7 +14,7 @@ const RegisterPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null); // Clear any previous errors
+        setError(null); 
 
         try {
             const response = await fetch('http://127.0.0.1:8000/auth/users/', {
@@ -28,11 +28,11 @@ const RegisterPage = () => {
             if (response.ok) {
                 navigate('/login');
             } else {
-                setError('Registration failed. Please check your information.'); // Set error message
+                setError('Registration failed. Please check your information.'); 
                 console.log('Registration failed');
             }
         } catch (error) {
-            setError('There was an error. Please try again later.'); // Set error message
+            setError('There was an error. Please try again later.'); 
             console.error('There was an error:', error);
         }
     };

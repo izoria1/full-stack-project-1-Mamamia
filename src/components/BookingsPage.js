@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, ListGroup, Container, Alert } from 'react-bootstrap';
-import '../styles/BookingsPage.css'; // Import custom CSS for BookingsPage styling
+import '../styles/BookingsPage.css'; 
 
 const BookingsPage = () => {
     const [bookings, setBookings] = useState([]);
@@ -9,7 +9,7 @@ const BookingsPage = () => {
     const [currentBookingId, setCurrentBookingId] = useState(null);
     const [error, setError] = useState(null); // State for error message
 
-    // Define fetchBookings outside of useEffect
+   
     const fetchBookings = async () => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -26,11 +26,11 @@ const BookingsPage = () => {
                     const data = await response.json();
                     setBookings(data);
                 } else {
-                    setError('Error fetching bookings.'); // Set error message
+                    setError('Error fetching bookings.'); 
                     console.error('Error fetching bookings:', response.statusText);
                 }
             } catch (error) {
-                setError('There was an error. Please try again later.'); // Set error message
+                setError('There was an error. Please try again later.'); 
                 console.error('Error:', error);
             }
         }
@@ -60,7 +60,7 @@ const BookingsPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null); // Clear any previous errors
+        setError(null); 
 
         const token = localStorage.getItem('token');
         const url = editing 
@@ -85,11 +85,11 @@ const BookingsPage = () => {
                     setEditing(false);
                     setCurrentBookingId(null);
                 } else {
-                    setError('Booking submission failed. Please check your information.'); // Set error message
+                    setError('Booking submission failed. Please check your information.'); 
                     console.error('Error:', response.statusText);
                 }
             } catch (error) {
-                setError('There was an error. Please try again later.'); // Set error message
+                setError('There was an error. Please try again later.'); 
                 console.error('Error:', error);
             }
         }
@@ -107,13 +107,13 @@ const BookingsPage = () => {
                 });
 
                 if (response.ok) {
-                    fetchBookings(); // Refresh bookings after cancellation
+                    fetchBookings();
                 } else {
-                    setError('Error cancelling booking.'); // Set error message
+                    setError('Error cancelling booking.'); 
                     console.error('Error cancelling booking:', response.statusText);
                 }
             } catch (error) {
-                setError('There was an error. Please try again later.'); // Set error message
+                setError('There was an error. Please try again later.'); 
                 console.error('Error:', error);
             }
         }
