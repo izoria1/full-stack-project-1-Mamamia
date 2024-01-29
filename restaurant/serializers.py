@@ -22,11 +22,11 @@ class CustomAuthTokenSerializer(AuthTokenSerializer):
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
-        fields = '__all__'  # You can list the fields you want to include
+        fields = '__all__'  
 
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = '__all__'
-        read_only_fields = ('user',)  # Set 'user' field as read-only
+        read_only_fields = ('user',) 
 

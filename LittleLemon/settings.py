@@ -62,7 +62,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
-    # ... other REST framework settings ...
 }
 
 DJOSER = {
